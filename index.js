@@ -3,15 +3,21 @@ showNotes();
 let addBtn = document.getElementById("addBtn");
 addBtn.addEventListener("click", function (e) {
     let addTxt = document.getElementById("addTxt");
+    let addTitle = document.getElementById("addTitle");
     let notes = localStorage.getItem("notes");
     if (notes == null) {
         notesObj = [];
     } else {
         notesObj = JSON.parse(notes);
     }
-    notesObj.push(addTxt.value);
+    let myObj = {
+        title: addTitle.value,
+        txt: addTxt.value
+    };
+    notesObj.push(myObj);
     localStorage.setItem("notes", JSON.stringify(notesObj));
     addTxt.value = "";
+    addTitle.value = "";
     showNotes();
 });
 
@@ -27,8 +33,8 @@ function showNotes() {
         html += `
             <div class="noteCard card mx-2 my-2" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">Note ${index + 1}</h5>
-                <p class="card-text"> ${element}</p>
+                <h5 class="card-title">${index + 1}.  ${element.title}</h5>
+                <p class="card-text"> ${element.txt}</p>
                 <button id="${index}" onclick="deleteNote(this.id)" class="btn btn-danger">Delete Note</button>
             </div>
         </div>`;
@@ -61,7 +67,8 @@ search.addEventListener("input", function () {
     Array.from(noteCards).forEach(function (element) {
 
         let cardTxt = element.getElementsByTagName("p")[0].innerText.toLocaleLowerCase();
-        if (cardTxt.includes(inputVal)) {
+        let cardTitle = element.getElementsByTagName("h5")[0].innerText.toLocaleLowerCase();
+        if (cardTxt.includes(inputVal) || cardTitle.includes(inputVal)) {
             element.style.display = "block";
         } else {
             element.style.display = "none";
