@@ -76,19 +76,20 @@ search.addEventListener("input", function () {
     })
 })
 
-let searchBtn = document.getElementById("searchBtn");
-searchBtn.addEventListener("click", function () {
-    let inputVal = search.value.toLowerCase();
-    // console.log("fired!", inputVal);
-    let noteCards = document.getElementsByClassName('noteCard');
-    Array.from(noteCards).forEach(function (element) {
-
-        let cardTxt = element.getElementsByTagName("p")[0].innerText;
-        if (cardTxt.includes(inputVal)) {
-            element.style.display = "block";
-        } else {
-            element.style.display = "none";
-        }
-    })
-})
-
+// let searchBtn = document.getElementById("searchBtn");
+// searchBtn.addEventListener("click", (e) => {
+//     e.preventDefault();
+//     console.log("hello");
+//     let inputVal = search.value.toLowerCase();
+//     let noteCards = document.getElementsByClassName("noteCard");
+//     Array.from(noteCards).forEach(function (element) {
+//         let cardTitle = element.getElementsByTagName("h5")[0].innerText;
+//         let cardTxt = element.getElementsByTagName("p")[0].innerText;
+//         if (cardTxt.includes(inputVal) || cardTitle.includes(inputVal)) {
+//             element.style.display = "block";
+//             console.log("fired");
+//         } else {
+//             element.style.display = "none";
+//         }
+//     });
+// })
